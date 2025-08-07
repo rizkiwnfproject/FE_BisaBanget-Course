@@ -1,0 +1,76 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme {
+  /* purple */
+  --color-primary-0: #FFFFFF;
+  --color-primary-100: #E7DEFE;
+  --color-primary-200: #CEBEFE;
+  --color-primary-300: #B49DFE;
+  --color-primary-400: #9F84FD;
+  --color-primary-500: #7C5CFC;
+  --color-primary-600: #5E43D8;
+  --color-primary-700: #432EB5;
+  --color-primary-800: #2D1D92;
+  --color-primary-900: #1D1178;
+  /* green */
+  --color-success-100: #F5FCD2;
+  --color-success-200: #E8FAA6;
+  --color-success-300: #D3F178;
+  --color-success-400: #BCE455;
+  --color-success-500: #9CD323;
+  --color-success-600: #7FB519;
+  --color-success-700: #659711;
+  --color-success-800: #4C7A0B;
+  --color-success-900: #3B6506;
+  /* red */
+  --color-error-100: #FFE7D3;
+  --color-error-200: #FFC8A6;
+  --color-error-300: #FFA37A;
+  --color-error-400: #FF7F59;
+  --color-error-500: #FF4423;
+  --color-error-600: #DB2719;
+  --color-error-700: #B71112;
+  --color-error-800: #930B16;
+  --color-error-900: #7A0619;
+  /* yellow */
+  --color-warning-100: #FFF8D7;
+  --color-warning-200: #FFEFB0;
+  --color-warning-300: #FFE488;
+  --color-warning-400: #FFD96B;
+  --color-warning-500: #FFC73A;
+  --color-warning-600: #DBA32A;
+  --color-warning-700: #B7821D;
+  --color-warning-800: #936312;
+  --color-warning-900: #7A4D0B;
+  /* blue */
+  --color-information-100: #DCF3FF;
+  --color-information-200: #BAE5FF;
+  --color-information-300: #98D3FF;
+  --color-information-400: #7EC2FF;
+  --color-information-500: #54A6FF;
+  --color-information-600: #3D81DB;
+  --color-information-700: #2A60B7;
+  --color-information-800: #1A4393;
+  --color-information-900: #102E7A;
+  /* gray */
+  --color-secondary-100: #E0E9F4;
+  --color-secondary-200: #C3D4E9;
+  --color-secondary-300: #90A3BF;
+  --color-secondary-400: #596780;
+  --color-secondary-500: #1A202C;
+  --color-secondary-600: #131825;
+  --color-secondary-700: #0D121F;
+  --color-secondary-800: #080C19;
+  --color-secondary-900: #040815;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+}
