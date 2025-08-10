@@ -4,92 +4,109 @@ import TextCustom from '../../element/text/TextCustom'
 import { BsPlusCircle, BsPlusCircleFill } from 'react-icons/bs'
 import Card from '../../element/card/Card'
 import ImageCustom from '../../element/image/Image'
-import { Link } from 'react-router'
+import { Link, useLoaderData, useNavigate } from 'react-router'
+import { useMutation } from '@tanstack/react-query'
+import { deleteClass } from '../../../services/classService'
 
-const ClassFragment = ({
-  id = 1
-}) => {
+const ClassFragment = () => {
+  const data = useLoaderData()
+  const classes = data.classes.data
+  console.log(classes);
+  
+  
+  const role = data.role
+  
+  const navigate = useNavigate()
+
+  const { isLoading, mutateAsync } = useMutation({
+    mutationFn: (id) => deleteClass(id)
+  })
+
+  const handleDelete = async (id) => {
+    try {
+      await mutateAsync(id)
+      navigate('/user/class')
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <>
       <div className="overflow-y-hidden">
         <Header height='h-[100px]'>
           <div className="absolute top-13 left-1/2 -translate-x-1/2 border border-secondary-100 rounded-lg flex w-[96%] h-20 bg-primary-0 items-center px-5 justify-between">
             <TextCustom type="xl_700" textColor='text-information-800'>
-              Class Page
+              Halaman Kelas
             </TextCustom>
-            <Link to="/user/class/create">
-              <button className='bg-warning-500 hover:bg-warning-400 duration-150 cursor-pointer px-5 py-3 rounded-lg'>
-                <TextCustom type='md_700' textColor='text-secondary-800' classname='flex gap-2 items-center'>
-                  <BsPlusCircleFill size="20px" />
-                  New Class
-                </TextCustom>
-              </button>
-            </Link>
+            {role === "admin" && (
+              <Link to="/user/class/create">
+                <button className='bg-warning-500 hover:bg-warning-400 duration-150 cursor-pointer px-5 py-3 rounded-lg'>
+                  <TextCustom type='md_700' textColor='text-secondary-800' classname='flex gap-2 items-center'>
+                    <BsPlusCircleFill size="20px" />
+                    Tambahkan Data
+                  </TextCustom>
+                </button>
+              </Link>
+            )}
           </div>
         </Header>
-        <div className="mt-20 grid grid-cols-4 gap-2 pr-4 overflow-y-hidden">
-          <Card classname='h-[300px]' align='' padding='' flexDirection='flex-col'>
-            <div className="w-full h-[150px] ">
-              <ImageCustom path="course" imageUrl="image-1" format='jpg' alt="kelas" classname='w-full h-full object-cover object-top rounded-t-lg' />
-            </div>
-            <div className="h-[150px] px-5 py-2 flex flex-col justify-between">
-              <div className="flex flex-col">
-                <TextCustom type='md_600'>
-                  Nama Kelas
-                </TextCustom>
-                <div className="flex justify-between mt-2">
-                  <TextCustom type='xs_600'>
-                    Jumlah Siswa
+        <div className="mt-20 mb-10 grid grid-cols-4 gap-2 pr-4 overflow-y-hidden">
+          {classes.map((item, index) => (
+            <Card classname='h-[300px]' align='' padding='' flexDirection='flex-col' key={index}>
+              <div className="w-full h-[150px] ">
+                <ImageCustom path="course" imageUrl="image-1" format='jpg' alt="kelas" classname='w-full h-full object-cover object-top rounded-t-lg' />
+              </div>
+              <div className="h-[150px] px-5 py-2 flex flex-col justify-between">
+                <div className="flex flex-col">
+                  <TextCustom type='md_600'>
+                    {item.name}
                   </TextCustom>
-                  <TextCustom type='xs_600'>
-                    20 Siswa
-                  </TextCustom>
+                  <div className="flex justify-between mt-2">
+                    <TextCustom type='xs_600'>
+                      Jumlah Pelajaran
+                    </TextCustom>
+                    <TextCustom type='xs_600'>
+                      {classes[index].subjects.length}
+                    </TextCustom>
+                  </div>
+                  <div className="flex justify-between mt-2">
+                    <TextCustom type='xs_600'>
+                      Wali Kelas
+                    </TextCustom>
+                    <TextCustom type='xs_600'>
+                      {item.classAdvisorId.name}
+                    </TextCustom>
+                  </div>
                 </div>
-                <div className="flex justify-between mt-2">
-                  <TextCustom type='xs_600'>
-                    Wali Kelas
-                  </TextCustom>
-                  <TextCustom type='xs_600'>
-                    Bambang .spd
-                  </TextCustom>
+                <div className={`grid ${role === "admin" ? "grid-cols-3 gap-2 justify-between" : "grid-cols-1"}`}>
+                  <button className='bg-success-600 py-1 rounded '>
+                    <Link to={`/user/class/detail/${item._id}`}>
+                      <TextCustom type='md_500' textColor='text-white'>
+                        Detail
+                      </TextCustom>
+                    </Link>
+                  </button>
+                  {role === "admin" && (
+                    <>
+                      <button className='bg-warning-500 py-1 rounded'>
+                        <Link to={`/user/class/edit/${item._id}`}>
+                          <TextCustom type='md_500'>
+                            Edit
+                          </TextCustom>
+                        </Link>
+                      </button>
+                      <button className='bg-error-500 py-1 rounded cursor-pointer' onClick={() => handleDelete(item._id)} disabled={isLoading}>
+                        <TextCustom type='md_500' textColor='text-white'>
+                          Hapus
+                        </TextCustom>
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-2 justify-between">
-                <button className='bg-success-600 py-1 rounded '>
-                  <Link to={`/user/class/detail/${id}`}>
-                    <TextCustom type='md_500' textColor='text-white'>
-                      Detail
-                    </TextCustom>
-                  </Link>
-                </button>
-                <button className='bg-warning-500 py-1 rounded'>
-                  <Link to={`/user/class/edit/${id}`}>
-                    <TextCustom type='md_500'>
-                      Edit
-                    </TextCustom>
-                  </Link>
-                </button>
-                <button className='bg-error-500 py-1 rounded' onClick={() => document.getElementById('delete').showModal()}>
-                  <TextCustom type='md_500' textColor='text-white'>
-                    Hapus
-                  </TextCustom>
-                </button>
-              </div>
-            </div>
-          </Card>
+            </Card>
+          ))}
         </div>
-        <dialog id="delete" className="modal" >
-          <div className="modal-box overflow-y-hidden">
-            <h3 className="font-bold text-lg">Nama Kelas</h3>
-            <p className="py-4">Apakah Yakin Ingin Mengapus</p>
-            <div className="modal-action">
-              <form method="dialog" className='flex gap-3'>
-                <button className="bg-gray-200 px-4 py-2 rounded font-semibold">Cancel</button>
-                <button className="bg-error-500 px-4 py-2 rounded font-semibold text-primary-0">Delete</button>
-              </form>
-            </div>
-          </div>
-        </dialog>
       </div>
     </>
   )

@@ -3,7 +3,7 @@ import ClassFragment from '../../components/fragment/class/ClassFragment'
 
 const Class = () => {
     return (
-        <SectionWrapper maxWidth = '' padding = '' classname='overflow-y-hidden'>
+        <SectionWrapper maxWidth = '' padding = '' classname=''>
             <ClassFragment />
         </SectionWrapper >
   )

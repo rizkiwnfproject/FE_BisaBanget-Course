@@ -1,11 +1,32 @@
-import { Link } from "react-router"
+import { Link, useLoaderData, useNavigate, useParams } from "react-router"
 import Header from "../../element/header/Header"
-import ImageCustom from "../../element/image/Image"
 import TextCustom from "../../element/text/TextCustom"
+import { useMutation } from "@tanstack/react-query"
+import { deleteClass } from "../../../services/classService"
 
-const DetailClassFragment = ({
-    id = 1
-}) => {
+const DetailClassFragment = () => {
+    const { id } = useParams()
+    const data = useLoaderData()
+    const detailClass = data.detailClass
+    const role = data.role
+    
+    const navigate = useNavigate()
+
+
+    const { mutateAsync } = useMutation({
+        mutationFn: (id) => deleteClass(id)
+    })
+
+
+    const handleDelete = async (id) => {
+        try {
+            await mutateAsync(id)
+            navigate('/user/class')
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
     return (
         <>
             <div className="">
@@ -14,59 +35,55 @@ const DetailClassFragment = ({
                         <TextCustom type="xl_700" textColor='text-information-800'>
                             Detail Class
                         </TextCustom>
-                        <div className="flex gap-2 w-1/4">
-                            <button className='bg-warning-500 py-2 rounded w-full'>
-                                <Link to={`/user/class/edit/${id}`}>
-                                    <TextCustom type='md_500'>
-                                        Edit
+                        {role === "admin" && (
+                            <div className="flex gap-2 w-1/4">
+                                <button className='bg-warning-500 py-2 rounded w-full'>
+                                    <Link to={`/user/class/edit/${id}`}>
+                                        <TextCustom type='md_500'>
+                                            Edit
+                                        </TextCustom>
+                                    </Link>
+                                </button>
+                                <button className='bg-error-500 py-2 rounded w-full' onClick={() => handleDelete(id)}>
+                                    <TextCustom type='md_500' textColor='text-white'>
+                                        Hapus
                                     </TextCustom>
-                                </Link>
-                            </button>
-                            <button className='bg-error-500 py-2 rounded w-full' onClick={() => document.getElementById('delete').showModal()}>
-                                <TextCustom type='md_500' textColor='text-white'>
-                                    Hapus
-                                </TextCustom>
-                            </button>
-                        </div>
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </Header>
-                <div className="mt-20 grid grid-cols-2 gap-2 pr-4">
+                <div className="mt-20 grid grid-cols-1 gap-2 pr-4">
                     <div className="px-4">
                         <div className="space-y-5">
-                            <TextCustom type="3xl_700">Nama Kelas</TextCustom>
+                            <TextCustom type="3xl_700">{detailClass.name}</TextCustom>
                             <div className="space-y-3">
                                 <TextCustom type="lg_600">Deskripsi Kelas</TextCustom>
-                                <TextCustom type="sm_400" classname="text-justify">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis autem, fugiat mollitia velit, exercitationem dolores ducimus, repellat excepturi error aliquam labore. Suscipit, esse fugiat. Quidem sed quaerat incidunt nesciunt libero.</TextCustom>
+                                <TextCustom type="sm_400" classname="text-justify">{detailClass.description}</TextCustom>
                             </div>
                             <div className="border border-secondary-100 px-3 py-4 rounded flex justify-between">
                                 <TextCustom type="lg_600">Wali Kelas : </TextCustom>
-                                <TextCustom type="lg_600">Hendra</TextCustom>
+                                <TextCustom type="lg_600">{detailClass.classAdvisorId.name}</TextCustom>
                             </div>
                             <div className="border border-secondary-100 px-3 py-4 rounded flex flex-col gap-4">
                                 <TextCustom type="lg_600">Mata Pelajaran </TextCustom>
-                                <div className="w-full flex justify-between">
-                                    <TextCustom type="sm_400">IPA</TextCustom>
-                                    <TextCustom type="sm_400">Hendra</TextCustom>
-                                </div>
-                                <div className="w-full flex justify-between">
-                                    <TextCustom type="sm_400">IPA</TextCustom>
-                                    <TextCustom type="sm_400">Hendra</TextCustom>
-                                </div>
-                                <div className="w-full flex justify-between">
-                                    <TextCustom type="sm_400">IPA</TextCustom>
-                                    <TextCustom type="sm_400">Hendra</TextCustom>
-                                </div>
+                                {detailClass.subjects.map((item, index) => (
+                                    <div key={index} className="w-full flex justify-between">
+                                        <TextCustom type="sm_400">{item.subjectId.name}</TextCustom>
+                                        <TextCustom type="sm_400">{item.teacherId.name}</TextCustom>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
-                    <div className="students w-full border border-secondary-100 rounded px-3 py-4 flex flex-col gap-4">
+                    {/* <div className="students w-full border border-secondary-100 rounded px-3 py-4 flex flex-col gap-4">
                         <TextCustom type="lg_600">Nama Siswa </TextCustom>
                         <ol className="list-decimal list-inside">
                             <li>Item pertama</li>
                             <li>Item kedua</li>
                             <li>Item ketiga</li>
                         </ol>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </>

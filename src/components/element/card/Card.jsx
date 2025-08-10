@@ -10,7 +10,7 @@ const Card = ({
     children
 }) => {
     return (
-        <div className={`border ${borderColor} ${classname} ${align} ${flexDirection} ${padding} rounded-lg  flex ${gap}`}>
+        <div className={`border ${borderColor} ${classname} ${align} ${flexDirection} ${padding} rounded-lg flex ${gap}`}>
             {children}
         </div>
     )

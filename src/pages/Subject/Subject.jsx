@@ -1,12 +1,12 @@
-import CourseFragment from "../../components/fragment/course/CourseFragment"
+import SubjectFragment from "../../components/fragment/subject/SubjectFragment"
 import SectionWrapper from "../../components/fragment/wrapper/SectionWrapper"
 
-const Course = () => {
+const Subject = () => {
     return (
         <SectionWrapper maxWidth='' padding='' >
-            <CourseFragment />
+            <SubjectFragment />
         </SectionWrapper >
     )
 }
 
-export default Course
+export default Subject

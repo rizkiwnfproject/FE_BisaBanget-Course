@@ -2,6 +2,7 @@ import { Navigate } from "react-router"
 import PublicLayout from "../layouts/PublicLayout"
 import SignIn from "../pages/SignIn/SignIn"
 import SignUp from "../pages/SignUp/SignUp"
+import Error from "../pages/Error/Error"
 
 const PublicRoutes = {
   path: "/",
@@ -19,6 +20,7 @@ const PublicRoutes = {
       path: "sign-up",
       element: <SignUp />
     },
+    { path: "*", element: <Error /> }
   ]
 }
 
