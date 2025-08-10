@@ -44,9 +44,9 @@ const SubjectFragment = () => {
   }
   return (
     <>
-      <div className="">
+      <div className="relative md:static">
         <Header height='h-[100px]'>
-          <div className="absolute top-13 left-1/2 -translate-x-1/2 border border-secondary-100 rounded-lg flex w-[96%] h-20 bg-primary-0 items-center px-5 justify-between">
+          <div className="absolute top-13 left-1/2 -translate-x-1/2 border border-secondary-100 rounded-lg flex flex-col sm:flex-row w-[96%] h-25 md:h-20 bg-primary-0 items-center px-5 py-2 md:py-0 justify-between">
             <TextCustom type="xl_700" textColor='text-information-800'>
               Halaman Pelajaran
             </TextCustom>
@@ -62,8 +62,8 @@ const SubjectFragment = () => {
             )}
           </div>
         </Header>
-        <div className="mt-20 grid grid-cols-5 gap-2 pr-4">
-          <table className={`table ${drawer ? "col-span-3" : "col-span-5"}`}>
+        <div className="mt-20 grid grid-cols-6 gap-2 pr-4">
+          <table className={`table ${drawer ? "col-span-6 md:col-span-4" : "col-span-6"}`}>
             <thead>
               <tr>
                 <th>No</th>
@@ -81,7 +81,7 @@ const SubjectFragment = () => {
                   {role === "admin" ? "" : <td className=''>{data.className}</td>}
                   {role === "admin" && (
                     <td>
-                      <div className="flex w-full gap-3">
+                      <div className={`flex ${drawer ? "flex-col xl:flex-row" : "flex-col lg:flex-row"} w-full gap-3 `}>
                         <button
                           className='w-full px-4 py-2 bg-success-600 text-primary-0 font-semibold rounded-lg' onClick={() => handleDetailSubject(data)}>
                           Detail
@@ -108,7 +108,7 @@ const SubjectFragment = () => {
           </table>
           {drawer && selectedSubject && (
             <>
-              <Card padding='px-5 py-5' align='items-start' flexDirection='flex-col' classname='col-span-2 h-full justify-between'>
+              <Card padding='px-5 py-5' align='items-start' flexDirection='flex-col' classname='absolute right-0 bg-primary-0 md:static col-span-2 min-h-[400px] max-h-[50%] justify-between'>
                 <div className="flex flex-col gap-3">
                   <TextCustom type='xl_600'>
                     {selectedSubject.name}
@@ -119,7 +119,7 @@ const SubjectFragment = () => {
                         <li key={index}><b>{subj.className}</b> : {subj.teacherName}</li>
                       ))
                     ) : (
-                      <li>Tidak ada pelajaran</li>
+                      <li>Tidak Guru Yang Mengajar</li>
                     )}
                   </ul>
                 </div>

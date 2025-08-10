@@ -19,7 +19,7 @@ const AdvisorFragment = () => {
     };
     return (
         <>
-            <div className="">
+            <div className="relative md:static">
                 <Header height='h-[100px]'>
                     <div className="absolute top-13 left-1/2 -translate-x-1/2 border border-secondary-100 rounded-lg flex w-[96%] h-20 bg-primary-0 items-center px-5 justify-between">
                         <TextCustom type="xl_700" textColor='text-information-800'>
@@ -28,7 +28,7 @@ const AdvisorFragment = () => {
                     </div>
                 </Header>
                 <div className="mt-20 grid grid-cols-4 pr-4 gap-2">
-                    <div className={`${drawer ? "col-span-2" : "col-span-4"} overflow-x-auto rounded-box border border-secondary-100 bg-base-100`}>
+                    <div className={`${drawer ? "col-span-4 md:col-span-2" : "col-span-4"} overflow-x-auto rounded-box border border-secondary-100 bg-base-100`}>
                         <table className="table">
                             {/* head */}
                             <thead>
@@ -54,7 +54,7 @@ const AdvisorFragment = () => {
                     </div>
                     {drawer && selectedAdvisor && (
                         <>
-                            <Card padding='px-5 py-5' align='items-start' flexDirection='flex-col' classname='col-span-2 h-full justify-between'>
+                            <Card padding='px-5 py-5' align='items-start' flexDirection='flex-col' classname='absolute right-0 bg-primary-0 md:static col-span-2 min-h-max h-auto max-h-[70%] justify-between'>
                                 <div className="flex flex-col gap-3">
                                     <TextCustom type='xl_600'>
                                         {selectedAdvisor.name}

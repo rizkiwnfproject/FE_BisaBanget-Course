@@ -43,7 +43,7 @@ const TeacherAssignFragment = () => {
     <>
       <div className="">
         <Header height='h-[100px]'>
-          <div className="absolute top-13 left-1/2 -translate-x-1/2 border border-secondary-100 rounded-lg flex w-[96%] h-20 bg-primary-0 items-center px-5 justify-between">
+          <div className="absolute top-13 left-1/2 -translate-x-1/2 border border-secondary-100 rounded-lg flex flex-col md:flex-row w-[96%] h-30 md:h-20 bg-primary-0 items-center px-5 py-2 md:py-0 justify-between">
             <TextCustom type="xl_700" textColor='text-information-800'>
               Assign Guru Ke Kelas
             </TextCustom>
@@ -52,7 +52,7 @@ const TeacherAssignFragment = () => {
             </TextCustom>
           </div>
         </Header>
-        <div className="mt-20 grid grid-cols-2 gap-2 pr-4">
+        <div className="mt-20 grid lg:grid-cols-2 gap-2 pr-4">
           <div className="px-4">
             <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
               <div className="flex flex-col gap-2">
@@ -82,7 +82,7 @@ const TeacherAssignFragment = () => {
               </div>
             </form>
           </div>
-          <div className="banner max-h-[580px] w-full">
+          <div className="banner max-h-[580px] w-full hidden lg:block">
             <ImageCustom path="banner" imageUrl="image-1" format='jpg' alt="banner" classname='h-full w-full object-cover rounded-lg' />
           </div>
         </div>

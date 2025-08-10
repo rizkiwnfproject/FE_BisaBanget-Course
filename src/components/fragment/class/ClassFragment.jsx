@@ -34,7 +34,7 @@ const ClassFragment = () => {
     <>
       <div className="overflow-y-hidden">
         <Header height='h-[100px]'>
-          <div className="absolute top-13 left-1/2 -translate-x-1/2 border border-secondary-100 rounded-lg flex w-[96%] h-20 bg-primary-0 items-center px-5 justify-between">
+        <div className="absolute top-13 left-1/2 -translate-x-1/2 border border-secondary-100 rounded-lg flex flex-col sm:flex-row w-[96%] h-25 md:h-20 bg-primary-0 items-center px-5 py-2 md:py-0 justify-between">
             <TextCustom type="xl_700" textColor='text-information-800'>
               Halaman Kelas
             </TextCustom>
@@ -50,9 +50,9 @@ const ClassFragment = () => {
             )}
           </div>
         </Header>
-        <div className="mt-20 mb-10 grid grid-cols-4 gap-2 pr-4 overflow-y-hidden">
+        <div className="mt-20 mb-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 pr-4 overflow-y-hidden">
           {classes.map((item, index) => (
-            <Card classname='h-[300px]' align='' padding='' flexDirection='flex-col' key={index}>
+            <Card classname='min-h-[300px] max-h-[400px]' align='' padding='' flexDirection='flex-col' key={index}>
               <div className="w-full h-[150px] ">
                 <ImageCustom path="course" imageUrl="image-1" format='jpg' alt="kelas" classname='w-full h-full object-cover object-top rounded-t-lg' />
               </div>

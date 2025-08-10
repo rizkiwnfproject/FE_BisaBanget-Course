@@ -27,7 +27,7 @@ const TeacherFragment = () => {
 
     return (
         <>
-            <div className="">
+            <div className="relative md:static">
                 <Header height='h-[100px]'>
                     <div className="absolute top-13 left-1/2 -translate-x-1/2 border border-secondary-100 rounded-lg flex w-[96%] h-20 bg-primary-0 items-center px-5 justify-between">
                         <TextCustom type="xl_700" textColor='text-information-800'>
@@ -35,8 +35,8 @@ const TeacherFragment = () => {
                         </TextCustom>
                     </div>
                 </Header>
-                <div className="mt-20 grid grid-cols-4 pr-4 gap-2">
-                    <div className={`${drawer ? "col-span-2" : "col-span-4"} overflow-x-auto rounded-box border border-secondary-100 bg-base-100`}>
+                <div className="mt-20 grid grid-cols-6 pr-4 gap-2">
+                    <div className={`${drawer ? "col-span-6 md:col-span-4" : "col-span-6"} overflow-x-auto rounded-box border border-secondary-100 bg-base-100`}>
                         <table className="table">
                             <thead>
                                 <tr>
@@ -53,7 +53,7 @@ const TeacherFragment = () => {
                                             <th>{i++}</th>
                                             <td>{data.name}</td>
                                             <td>{data.email}</td>
-                                            <td className='flex gap-2'>
+                                            <td className='flex flex-col xl:flex-row gap-2'>
                                                 <button
                                                     className='px-4 py-2 bg-success-800 text-primary-0 font-semibold rounded-lg'>
                                                     <Link to={`/user/teacher/${data._id}/assign-class-subject`}>
@@ -74,12 +74,12 @@ const TeacherFragment = () => {
                     </div>
                     {drawer && selectedTeacher && (
                         <>
-                            <Card padding='px-5 py-5' align='items-start' flexDirection='flex-col' classname='col-span-2 h-full justify-between'>
+                            <Card padding='px-5 py-5' align='items-start' flexDirection='flex-col' classname='absolute right-0 bg-primary-0 md:static col-span-2 min-h-[400px] max-h-[50%] justify-between'>
                                 <div className="flex flex-col gap-3">
                                     <TextCustom type='xl_600'>
                                         {selectedTeacher.name}
                                     </TextCustom>
-                                    <TextCustom type='xs_500' textColor='text-secondary-400'>
+                                    <TextCustom type='xs_500' textColor='text-secondary-400' respText='text-xs'>
                                         {selectedTeacher.email}
                                     </TextCustom>
                                     {/* <TextCustom type='sm_500' textColor='text-secondary-800' classname='flex justify-between w-full'>
